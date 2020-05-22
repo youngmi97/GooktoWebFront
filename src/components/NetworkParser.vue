@@ -28,7 +28,7 @@
 
 <script>
 import SimulationPanel from './SimulationPanel.vue'
-import axios from 'axios'
+const { BlobServiceClient } = require("@azure/storage-blob");
 
 export default {
     name: 'NetworkParser',
@@ -48,26 +48,24 @@ export default {
                 formData.append('file', this.file);
 
 
-                //file format configurations can be made here
-                let axiosConfig = {
-                    headers: {
-                        'Content-Type': 'text/plain',
-                        'Accept': '*',
-                    }
-                };
-
                 /*
                     Make the request to the POST /single-file URL
                 */
-                axios.post( 'http://localhost:8081/single-file',
-                    formData, axiosConfig
-                ).then(response => {
-                    console.log("Success!");
-                    console.log({ response });
-                }
-                ).catch(error => {
-                    console.log({ error });
-                });
+
+                // Enter your storage account name and shared key
+                const account = "siminoutdb";
+                const sas = "se=2021-05-21&sp=rwdlac&sv=2018-03-28&ss=b&srt=sco&sig=YpAmPl9%2BJEZsTAecambIl4UYSwQqI9haA/3LFQyyQzo%3D";
+                
+                const blobServiceClient = new BlobServiceClient(
+                    `https://${account}.blob.core.windows.net?${sas}`
+                );
+
+                const containerClient = blobServiceClient.getContainerClient('inputdb');
+
+                const content = "Hello world!";
+                const blobName = "networkfile" + new Date().getTime();
+                const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+                blockBlobClient.upload(this.file, content.length);
             } else {
                 console.log("there are no files.");
             }

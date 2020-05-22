@@ -9,10 +9,13 @@
     "start": "vue-cli-service serve"
   },
   "dependencies": {
+    "@azure/identity": "^1.0.3",
+    "@azure/storage-blob": "^12.1.2",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "express": "^4.17.1",
     "vue": "^2.6.11",
+    "vue-azure-blob-upload": "0.0.6",
     "vuetify": "^2.2.11"
   },
   "devDependencies": {
