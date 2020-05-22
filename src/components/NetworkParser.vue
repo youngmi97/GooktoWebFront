@@ -7,7 +7,7 @@
     >
     <v-card-title
     class="headline">
-        Network Input Parser UPDATED !
+        Network Input Parser UPDATED TWICE 
     </v-card-title>
     <v-file-input show-size label="Choose Network File"></v-file-input>
 
