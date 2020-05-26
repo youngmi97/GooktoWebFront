@@ -4,6 +4,7 @@
 
 <script>
 import Index from './pages/index';
+import './app.css';
 export default {
   name: 'App',
   components: {
